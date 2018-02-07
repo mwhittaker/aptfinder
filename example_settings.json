@@ -1,0 +1,8 @@
+{
+  "min_price": 0,
+  "max_price": 3000,
+  "sleep_interval": 1200,
+  "slack_channel": "#listings",
+  "slack_token": "XXXXXXXXXX",
+  "database_file": "listings.db"
+}

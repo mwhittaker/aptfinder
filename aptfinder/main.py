@@ -1,8 +1,10 @@
 import time
 import argparse
 
-from .settings import from_file
 from .craigslist import CraigslistScraper
+from .db import Database
+from .padmapper import PadmapperScraper
+from .settings import from_file
 
 def main():
     parser = argparse.ArgumentParser()
@@ -11,13 +13,16 @@ def main():
     settings = from_file(args.settings)
 
     scrapers = [
-        CraigslistScraper(settings)
+        CraigslistScraper(settings),
+        PadmapperScraper(settings),
     ]
 
-    # while True:
+    db = Database(settings.database_file)
+
     for scraper in scrapers:
         for listing in scraper.scrape():
             print(listing)
+        db.insert_listings(scraper.scrape())
 
 if __name__ == '__main__':
     main()

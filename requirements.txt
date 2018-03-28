@@ -1,4 +1,4 @@
-geopy=1.11.0
-python-craiglist=1.0.5
-requests=.2.14.2
-slackclient=1.1.2
+geopy==1.11.0
+python-craiglist==1.0.5
+requests==2.14.2
+slackclient==1.1.2

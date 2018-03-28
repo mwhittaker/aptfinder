@@ -2,7 +2,8 @@
   "min_price": 0,
   "max_price": 3000,
   "sleep_interval": 1200,
-  "slack_channel": "#listings",
-  "slack_token": "XXXXXXXXXX",
+  "listings_channel": "#listings",
+  "debug_channel": "#debug",
+  "slack_token": "FILL_IN_WITH_ACTUAL_TOKEN",
   "database_file": "listings.db"
 }

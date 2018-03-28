@@ -1,3 +1,4 @@
+from datetime import datetime
 from typing import Generator
 
 from craigslist import CraigslistHousing
@@ -12,10 +13,13 @@ class CraigslistScraper(Scraper):
         self.settings = settings
 
     def scrape(self) -> Generator[Listing, None, None]:
+        # TODO(mwhittaker): Don't hard code this.
         craigslist = CraigslistHousing(
             site='sfbay',
             category='apa',
             filters={
+                'zip_code': 94720,
+                'search_distance': 3,
                 'min_price': self.settings.min_price,
                 'max_price': self.settings.max_price,
             })
@@ -33,6 +37,10 @@ class CraigslistScraper(Scraper):
             else:
                 distance = None
 
+            # Parse date. Craigslist dates are of the form 2018-03-28 10:26.
+            date_posted = datetime.strptime(result['datetime'],
+                                            '%Y-%m-%d %H:%M')
+
             yield Listing(
                     website='craigslist',
                     id=result['id'],
@@ -40,4 +48,4 @@ class CraigslistScraper(Scraper):
                     name=result['name'],
                     price=price,
                     distance_to_soda=distance,
-                    date_posted=result['datetime'])
+                    date_posted=date_posted)

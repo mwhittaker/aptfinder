@@ -1,4 +1,5 @@
-settings.json
+listings.db
+private_settings.json
 
 ################################################################################
 # vim

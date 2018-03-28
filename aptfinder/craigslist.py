@@ -38,8 +38,11 @@ class CraigslistScraper(Scraper):
                 distance = None
 
             # Parse date. Craigslist dates are of the form 2018-03-28 10:26.
-            date_posted = datetime.strptime(result['datetime'],
-                                            '%Y-%m-%d %H:%M')
+            try:
+                date_posted = datetime.strptime(result['datetime'],
+                                                '%Y-%m-%d %H:%M')
+            except Exception:
+                date_posted = None
 
             yield Listing(
                     website='craigslist',

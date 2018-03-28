@@ -19,6 +19,7 @@ class SlackClient:
                                    user='Apartment Finder Bot')
 
     def debug(self, s: str) -> None:
+        print(s)
         self.slack_client.api_call('chat.postMessage',
                                    channel=self.debug_channel,
                                    text=s,

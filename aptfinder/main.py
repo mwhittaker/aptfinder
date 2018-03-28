@@ -11,13 +11,15 @@ from .slack import SlackClient
 from .listing import Listing
 
 def main() -> None:
+    # Read settings from the command line.
     parser = argparse.ArgumentParser()
     parser.add_argument('settings', help='JSON settings file.')
     args = parser.parse_args()
     settings = from_file(args.settings)
 
+    # Set up database, slack client, and scrapers.
     db = Database(settings.database_file)
-    slack_client = SlackClient(token=settings.slack_token,
+    slack = SlackClient(token=settings.slack_token,
                                listings_channel=settings.listings_channel,
                                debug_channel=settings.debug_channel)
     # TODO(mwhittaker): Debug and deploy PadmapperScraper.
@@ -26,26 +28,26 @@ def main() -> None:
         # PadmapperScraper(settings),
     ]
 
-
+    # Scrape!
     try:
         while True:
-            slack_client.debug(f'Scraping...')
+            slack.debug('Scraping...')
 
             new_listings: List[Listing] = []
             for scraper in scrapers:
                 for listing in scraper.scrape():
                     if not db.listing_exists(listing):
-                        slack_client.post_listing(listing.to_slack_string())
+                        print(listing)
+                        slack.post_listing(listing.to_slack_string())
                         new_listings.append(listing)
             db.insert_listings(new_listings)
 
-            slack_client.debug(f'Found {len(new_listings)} new listings.')
-            slack_client.debug(
-                f'Sleeping for {settings.sleep_interval} seconds.')
+            slack.debug(f'Found {len(new_listings)} new listings.')
+            slack.debug(f'Sleeping for {settings.sleep_interval} seconds.')
             time.sleep(settings.sleep_interval)
     except Exception as e:
-        slack_client.debug(traceback.format_exc())
-        slack_client.debug(repr(e))
+        strings = ['```', traceback.format_exc(), repr(e), '```']
+        slack.debug('\n'.join(strings))
 
 if __name__ == '__main__':
     main()

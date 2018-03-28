@@ -1,5 +1,3 @@
-TODO
-- [ ] Handle padmapper min and max prices.
-- [ ] Handle padmapper created on vs listed on date.
-- [ ] Make sure the most recent results are being returned.
-- [ ] Reverse google search images.
+# Apartment Finder
+Apartment finding bot inspired by [this
+article](https://www.dataquest.io/blog/apartment-finding-slackbot/).

@@ -19,7 +19,7 @@ class CraigslistScraper(Scraper):
             category='apa',
             filters={
                 'zip_code': 94720,
-                'search_distance': 3,
+                'search_distance': 1,
                 'min_price': self.settings.min_price,
                 'max_price': self.settings.max_price,
             })

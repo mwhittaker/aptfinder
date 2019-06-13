@@ -1,12 +1,10 @@
-from datetime import datetime
-from typing import Generator
-
-import requests
-
 from .geo import distance_to_soda
 from .listing import Listing
 from .scraper import Scraper
 from .settings import Settings
+from datetime import datetime
+from typing import Generator
+import requests
 
 class PadmapperScraper(Scraper):
     def __init__(self, settings: Settings) -> None:

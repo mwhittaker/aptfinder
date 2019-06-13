@@ -1,6 +1,5 @@
-import slack
-
 from .settings import Settings
+import slack
 
 class SlackClient:
     def __init__(self,

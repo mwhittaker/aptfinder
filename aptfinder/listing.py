@@ -1,5 +1,5 @@
-from typing import NamedTuple, Optional
 from datetime import datetime
+from typing import NamedTuple, Optional
 
 class Listing(NamedTuple):
     website: str
@@ -7,7 +7,7 @@ class Listing(NamedTuple):
     url: str
     name: str
     price: int
-    distance_to_soda: float
+    distance_to_soda: Optional[float]
     date_posted: Optional[datetime]
 
     def to_slack_string(self) -> str:

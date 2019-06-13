@@ -1,7 +1,6 @@
-from typing import Generator
-
 from .listing import Listing
+from typing import Iterator
 
 class Scraper:
-    def scrape(self) -> Generator[Listing, None, None]:
+    def scrape(self) -> Iterator[Listing]:
         raise NotImplementedError()

@@ -1,14 +1,13 @@
+from .craigslist import CraigslistScraper
+from .db import Database
+from .listing import Listing
+from .padmapper import PadmapperScraper
+from .settings import from_file
+from .slack import SlackClient
 from typing import List
 import argparse
 import time
 import traceback
-
-from .craigslist import CraigslistScraper
-from .db import Database
-from .padmapper import PadmapperScraper
-from .settings import from_file
-from .slack import SlackClient
-from .listing import Listing
 
 def main() -> None:
     # Read settings from the command line.

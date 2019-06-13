@@ -1,16 +1,12 @@
-from typing import List
-
-import sqlite3
-
 from .listing import Listing
+from typing import List
+import sqlite3
 
 class Database:
     def __init__(self, database_file: str) -> None:
         self.database_file = database_file
         self.connection = sqlite3.connect(database_file)
-        self.create_relation()
 
-    def create_relation(self) -> None:
         cursor = self.connection.cursor()
         cursor.execute("""
           CREATE TABLE IF NOT EXISTS Listings (

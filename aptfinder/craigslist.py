@@ -1,18 +1,16 @@
-from datetime import datetime
-from typing import Generator
-
-from craigslist import CraigslistHousing
-
 from .geo import distance_to_soda
 from .listing import Listing
 from .scraper import Scraper
 from .settings import Settings
+from craigslist import CraigslistHousing
+from datetime import datetime
+from typing import Iterator, Optional
 
 class CraigslistScraper(Scraper):
     def __init__(self, settings: Settings) -> None:
         self.settings = settings
 
-    def scrape(self) -> Generator[Listing, None, None]:
+    def scrape(self) -> Iterator[Listing]:
         # TODO(mwhittaker): Don't hard code this.
         craigslist = CraigslistHousing(
             site='sfbay',
@@ -31,16 +29,15 @@ class CraigslistScraper(Scraper):
             price = int(result['price'][1:])
 
             # Sometimes, result['geotag'] is None.
+            distance: Optional[float] = None
             if result['geotag']:
                 lat, lon = result['geotag']
                 distance = distance_to_soda(lat, lon)
-            else:
-                distance = None
 
             # Parse date. Craigslist dates are of the form 2018-03-28 10:26.
             try:
-                date_posted = datetime.strptime(result['datetime'],
-                                                '%Y-%m-%d %H:%M')
+                date_posted: Optional[datetime] = datetime.strptime(
+                        result['datetime'], '%Y-%m-%d %H:%M')
             except Exception:
                 date_posted = None
 

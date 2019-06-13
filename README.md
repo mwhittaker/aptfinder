@@ -7,7 +7,7 @@ First, install all the required dependencies. We recommend using something like
 conda:
 
 ```bash
-conda create --name aptfinder --python=3.6
+conda create --name aptfinder python=3.6
 conda activate aptfinder
 pip install -r requirements.txt
 ```

@@ -1,6 +1,7 @@
 {
   "min_price": 0,
   "max_price": 3000,
+  "max_distance": 1.5,
   "sleep_interval": 1200,
   "listings_channel": "#listings",
   "debug_channel": "#debug",

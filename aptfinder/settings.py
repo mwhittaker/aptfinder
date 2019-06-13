@@ -4,6 +4,7 @@ import json
 class Settings(NamedTuple):
     min_price: int
     max_price: int
+    max_distance: float
     sleep_interval: int
     listings_channel: str
     debug_channel: str
@@ -14,6 +15,7 @@ def from_json(d: Dict[str, Any]) -> Settings:
     return Settings(
         min_price=d['min_price'],
         max_price=d['max_price'],
+        max_distance=d['max_distance'],
         sleep_interval=d['sleep_interval'],
         listings_channel=d['listings_channel'],
         debug_channel=d['debug_channel'],

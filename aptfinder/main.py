@@ -19,8 +19,8 @@ def main() -> None:
     # Set up database, slack client, and scrapers.
     db = Database(settings.database_file)
     slack = SlackClient(token=settings.slack_token,
-                               listings_channel=settings.listings_channel,
-                               debug_channel=settings.debug_channel)
+                        listings_channel=settings.listings_channel,
+                        debug_channel=settings.debug_channel)
     # TODO(mwhittaker): Debug and deploy PadmapperScraper.
     scrapers = [
         CraigslistScraper(settings),

@@ -8,7 +8,7 @@ conda:
 
 ```bash
 conda create --name aptfinder python=3.6
-conda activate aptfinder
+source activate aptfinder
 pip install -r requirements.txt
 ```
 

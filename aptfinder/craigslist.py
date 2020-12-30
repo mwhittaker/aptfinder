@@ -24,9 +24,9 @@ class CraigslistScraper(Scraper):
 
         kwargs = {'sort_by':'newest', 'geotagged':True, 'limit':20}
         for result in craigslist.get_results(**kwargs):
-            # result['price'] looks something like '$1000'. To convert a price
-            # to an integer, we remove the leading dollar sign.
-            price = int(result['price'][1:])
+            # result['price'] looks something like '$1,000'. To convert a price
+            # to an integer, we remove the leading dollar sign and any commas.
+            price = int(result['price'][1:].replace(',', ''))
 
             # Sometimes, result['geotag'] is None.
             distance: Optional[float] = None
